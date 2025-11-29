@@ -17,8 +17,9 @@
 </style>
 </head>
 <body>
-<h1>📚 Library Escape (Background Test)</h1>
+<h1>Block Mania</h1>
 <p>Move with Arrow Keys — Shoot with Space</p>
+<p>Avoid the Red Squares. Destroy the Green!</p>
 <canvas id="game" width="800" height="500"></canvas>
 
 <script>
@@ -31,13 +32,13 @@ const ctx = canvas.getContext("2d");
 // ---------------------------------------
 // BACKGROUND IMAGE
 // ---------------------------------------
-const backgroundImg = new Image();
-backgroundImg.src = "https://i.imgur.com/4NJlH0P.jpeg"; // library background
+// const backgroundImg = new Image();
+// backgroundImg.src = "https://i.imgur.com/4NJlH0P.jpeg"; // library background
 
-let backgroundLoaded = false;
-backgroundImg.onload = () => {
-  backgroundLoaded = true;
-};
+// let backgroundLoaded = false;
+// backgroundImg.onload = () => {
+//   backgroundLoaded = true;
+// };
 
 // ---------------------------------------
 // GAME STATE
