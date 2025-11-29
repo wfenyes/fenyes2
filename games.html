@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Library Escape (With Background)</title>
+<style>
+  body {
+    background: #e8e6df;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  canvas {
+    background: #ffffff;
+    border: 3px solid #333;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<h1>📚 Library Escape (Background Test)</h1>
+<p>Move with Arrow Keys — Shoot with Space</p>
+<canvas id="game" width="800" height="500"></canvas>
+
+<script>
+// ---------------------------------------
+// CANVAS SETUP
+// ---------------------------------------
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+// ---------------------------------------
+// BACKGROUND IMAGE
+// ---------------------------------------
+const backgroundImg = new Image();
+backgroundImg.src = "https://i.imgur.com/4NJlH0P.jpeg"; // library background
+
+let backgroundLoaded = false;
+backgroundImg.onload = () => {
+  backgroundLoaded = true;
+};
+
+// ---------------------------------------
+// GAME STATE
+// ---------------------------------------
+let keys = {};
+let score = 0;
+let gameOver = false;
+
+// Player
+let boy = {
+  x: 100,
+  y: 250,
+  width: 40,
+  height: 40,
+  speed: 4,
+  color: "blue"
+};
+
+let lasers = [];
+let books = [];
+let librarians = [];
+
+// ---------------------------------------
+// INPUT
+// ---------------------------------------
+document.addEventListener("keydown", e => {
+  keys[e.key] = true;
+  if (e.key === " ") shoot();
+});
+
+document.addEventListener("keyup", e => keys[e.key] = false);
+
+// ---------------------------------------
+// SHOOTING
+// ---------------------------------------
+function shoot() {
+  lasers.push({
+    x: boy.x + boy.width,
+    y: boy.y + boy.height / 2 - 3,
+    width: 12,
+    height: 6,
+    speed: 8,
+    color: "yellow"
+  });
+}
+
+// ---------------------------------------
+// SPAWNING
+// ---------------------------------------
+function spawnBook() {
+  books.push({
+    x: 800,
+    y: Math.random() * 460,
+    width: 30,
+    height: 30,
+    speed: 3 + Math.random() * 2,
+    color: "red"
+  });
+}
+
+function spawnLibrarian() {
+  librarians.push({
+    x: 800,
+    y: Math.random() * 450,
+    width: 45,
+    height: 45,
+    speed: 1.5,
+    color: "green"
+  });
+}
+
+setInterval(spawnBook, 1000);
+setInterval(spawnLibrarian, 3000);
+
+// ---------------------------------------
+// COLLISION
+// ---------------------------------------
+function collides(a, b) {
+  return (
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y
+  );
+}
+
+// ---------------------------------------
+// GAME LOGIC
+// ---------------------------------------
+function update() {
+  if (gameOver) return;
+
+  if (keys["ArrowUp"]) boy.y -= boy.speed;
+  if (keys["ArrowDown"]) boy.y += boy.speed;
+  if (keys["ArrowLeft"]) boy.x -= boy.speed;
+  if (keys["ArrowRight"]) boy.x += boy.speed;
+
+  boy.x = Math.max(0, Math.min(760, boy.x));
+  boy.y = Math.max(0, Math.min(460, boy.y));
+
+  lasers.forEach(l => l.x += l.speed);
+  books.forEach(b => b.x -= b.speed);
+
+  librarians.forEach(L => {
+    let dx = boy.x - L.x;
+    let dy = boy.y - L.y;
+    let dist = Math.hypot(dx, dy);
+    if (dist > 0) {
+      L.x += (dx / dist) * L.speed;
+      L.y += (dy / dist) * L.speed;
+    }
+  });
+
+  // Laser hits librarian
+  lasers.forEach((laser, li) => {
+    librarians.forEach((lib, ei) => {
+      if (collides(laser, lib)) {
+        librarians.splice(ei, 1);
+        lasers.splice(li, 1);
+        score += 5;
+      }
+    });
+  });
+
+  // Boy hit
+  books.forEach(b => {
+    if (collides(b, boy)) endGame();
+  });
+
+  librarians.forEach(L => {
+    if (collides(L, boy)) endGame();
+  });
+}
+
+// ---------------------------------------
+// END GAME
+// ---------------------------------------
+function endGame() {
+  gameOver = true;
+  ctx.fillStyle = "red";
+  ctx.font = "48px Arial";
+  ctx.fillText("GAME OVER", 270, 250);
+  ctx.fillText("Score: " + score, 330, 310);
+}
+
+// ---------------------------------------
+// DRAWING
+// ---------------------------------------
+function drawRect(obj) {
+  ctx.fillStyle = obj.color;
+  ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
+}
+
+function draw() {
+  ctx.clearRect(0, 0, 800, 500);
+
+  // Draw background
+  if (backgroundLoaded) {
+    ctx.drawImage(backgroundImg, 0, 0, 800, 500);
+  }
+
+  drawRect(boy);
+  lasers.forEach(drawRect);
+  books.forEach(drawRect);
+  librarians.forEach(drawRect);
+
+  ctx.fillStyle = "black";
+  ctx.font = "20px Arial";
+  ctx.fillText("Score: " + score, 10, 20);
+}
+
+// ---------------------------------------
+// GAME LOOP
+// ---------------------------------------
+function loop() {
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>
