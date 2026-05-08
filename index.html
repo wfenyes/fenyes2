@@ -136,27 +136,40 @@
                     </p>
                 </div>
 
-                <div class="sermons-grid">
-                    <article class="sermon-card">
-                        <p class="skill-meta">Feb 16, 2026 | YouTube</p>
-                        <h3>Don't Leave Jerusalem</h3>
-                        <p>A sermon on Acts Chapter 1.</p>
-                        <a class="text-link" href="https://www.youtube.com/watch?v=XCArTvfy5sQ" target="_blank" rel="noopener noreferrer">Watch sermon</a>
-                    </article>
+                <div class="sermons-carousel" aria-roledescription="carousel" aria-label="Sermon videos">
+                    <div class="sermons-viewport">
+                        <div class="sermons-track">
+                            <article class="sermon-card">
+                                <p class="skill-meta">Feb 16, 2026 | YouTube</p>
+                                <h3>Don't Leave Jerusalem</h3>
+                                <p>A sermon on Acts 1.</p>
+                                <p>Too often we move into what we believe the Lord is calling us into, but we do it without His power.</p>
+                                <a class="text-link" href="https://www.youtube.com/watch?v=XCArTvfy5sQ" target="_blank" rel="noopener noreferrer">Watch sermon</a>
+                            </article>
 
-                    <article class="sermon-card">
-                        <p class="skill-meta">Jan 12, 2026 | YouTube</p>
-                        <h3>The Purpose of Prophecy</h3>
-                        <p>A sermon on Daniel 11.</p>
-                        <a class="text-link" href="https://www.youtube.com/watch?v=gqm7vLecSNE" target="_blank" rel="noopener noreferrer">Watch sermon</a>
-                    </article>
+                            <article class="sermon-card">
+                                <p class="skill-meta">Jan 12, 2026 | YouTube</p>
+                                <h3>The Purpose of Prophecy</h3>
+                                <p>A sermon on Daniel 11.</p>
+                                <p>One of the greatest gifts we can receive from prophecy is the knowledge that God is in control.</p>
+                                <a class="text-link" href="https://www.youtube.com/watch?v=gqm7vLecSNE" target="_blank" rel="noopener noreferrer">Watch sermon</a>
+                            </article>
 
-                    <article class="sermon-card">
-                        <p class="skill-meta">YouTube</p>
-                        <h3>Sermon Title</h3>
-                        <p>Add a short description, scripture reference, church name, or date for this sermon.</p>
-                        <a class="text-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Watch sermon</a>
-                    </article>
+                            <article class="sermon-card">
+                                <p class="skill-meta">May 8, 2026 | YouTube</p>
+                                <h3>He's Working Ahead of You</h3>
+                                <p>A sermon on Acts 8.</p>
+                                <p>We view evangelism as a terrifying prospect because we forget that God goes before us in all things.</p>
+                                <a class="text-link" href="https://www.youtube.com/watch?v=eywwCRFc5Js" target="_blank" rel="noopener noreferrer">Watch sermon</a>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="carousel-controls" aria-label="Sermon carousel controls">
+                        <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous sermon">Prev</button>
+                        <div class="carousel-dots" aria-label="Select sermon"></div>
+                        <button class="carousel-button" type="button" data-carousel-next aria-label="Next sermon">Next</button>
+                    </div>
                 </div>
             </section>
 
@@ -168,5 +181,81 @@
                 <a class="button primary" href="mailto:wfenyes@gmail.com">Email me</a>
             </section>
         </main>
+        <script>
+            const sermonCarousel = document.querySelector(".sermons-carousel");
+
+            if (sermonCarousel) {
+                const track = sermonCarousel.querySelector(".sermons-track");
+                const cards = Array.from(sermonCarousel.querySelectorAll(".sermon-card"));
+                const prevButton = sermonCarousel.querySelector("[data-carousel-prev]");
+                const nextButton = sermonCarousel.querySelector("[data-carousel-next]");
+                const controls = sermonCarousel.querySelector(".carousel-controls");
+                const dotsWrap = sermonCarousel.querySelector(".carousel-dots");
+                let activeIndex = 0;
+
+                function visibleCount() {
+                    return window.matchMedia("(max-width: 880px)").matches ? 1 : 3;
+                }
+
+                function maxIndex() {
+                    return Math.max(0, cards.length - visibleCount());
+                }
+
+                function renderDots() {
+                    dotsWrap.innerHTML = "";
+
+                    for (let index = 0; index <= maxIndex(); index += 1) {
+                        const dot = document.createElement("button");
+                        dot.type = "button";
+                        dot.className = "carousel-dot";
+                        dot.setAttribute("aria-label", `Show sermon set ${index + 1}`);
+                        dot.addEventListener("click", () => {
+                            activeIndex = index;
+                            updateCarousel();
+                        });
+                        dotsWrap.appendChild(dot);
+                    }
+                }
+
+                function updateCarousel() {
+                    activeIndex = Math.min(activeIndex, maxIndex());
+                    controls.hidden = cards.length <= visibleCount();
+
+                    const card = cards[0];
+                    const trackStyles = window.getComputedStyle(track);
+                    const gap = parseFloat(trackStyles.columnGap || trackStyles.gap);
+                    const offset = activeIndex * (card.offsetWidth + gap);
+                    track.style.transform = `translateX(-${offset}px)`;
+
+                    dotsWrap.querySelectorAll("button").forEach((dot, index) => {
+                        dot.classList.toggle("active", index === activeIndex);
+                        dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+                    });
+                }
+
+                cards.forEach((card, index) => {
+                    card.setAttribute("aria-roledescription", "slide");
+                    card.setAttribute("aria-label", `${index + 1} of ${cards.length}`);
+                });
+
+                prevButton.addEventListener("click", () => {
+                    activeIndex = Math.max(0, activeIndex - 1);
+                    updateCarousel();
+                });
+
+                nextButton.addEventListener("click", () => {
+                    activeIndex = Math.min(maxIndex(), activeIndex + 1);
+                    updateCarousel();
+                });
+
+                window.addEventListener("resize", () => {
+                    renderDots();
+                    updateCarousel();
+                });
+
+                renderDots();
+                updateCarousel();
+            }
+        </script>
     </body>
 </html>
