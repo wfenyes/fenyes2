@@ -1,72 +1,138 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
     <head>
-        <title>Billy Fenyes Page</title>
-        <link rel="stylesheet" href="style.css"/>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>William Fenyes | Portfolio</title>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <main>
-            <section class="hero maroon">
-                <nav>
-                    <ul>
-                        <a href="#bio"><li>Bio</li></a>
-                        <a href="#skills"><li>Skills</li></a>
-                        <a href="mailto:wfenyes@gmail.com"><li>Contact</li></a>
-                        <a href="games.html"><li>Game</li></a>
-                    </ul>
-                </nav>
-                <div class="hero-call">
-                    <h1 class="always">Always...</h1>
-                    <ul class="trait-list">
-                        <li>Curious</li>
-                        <li>Reliable</li>
-                        <li>Organized</li>
-                    </ul>
-                </div>
-            </div>
-            </section>
-            <div id="bio" class="section-title light-tan">
-                <h1>Bio</h1>
-            </div>
-            <section class="summary light-tan">
-                <div class="img-container">
-                    <img class="headshot" src="assets/images/billy-headshot.jpg"/>
-                </div>
-                <p class="bio">My name is William (Billy) Fenyes. I was born and raised in and around Baltimore, MD and am a devoted Orioles and Ravens fan.
-                    For the last 15 years of my life I have been dedicated to improving the lives of those around me by serving at local nonprofits. I am always 
-                    looking for the best way to serve those around me by exploring new technologies and innovative ways of providing services. In my free time,
-                    I love to learn new skills and am espeically fond of creating environments where I can learn those new skills while building community.</p>
-                </p>
-            </section>
-            <div id="skills" class="section-title light-tan">
-                <h1>Skills</h1>
-            </div>
-            <section class="best-qualities light-tan">
+        <header class="site-header">
+            <a class="brand" href="#top" aria-label="William Fenyes home">William Fenyes</a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="#bio">Bio</a>
+                <a href="#skills">Skills</a>
+                <a href="#sermons">Sermons</a>
+                <a href="games.html">Game</a>
+                <a href="mailto:wfenyes@gmail.com">Contact</a>
+            </nav>
+        </header>
 
-                <div class="quality-card green">
-                    <img class="card-image" src="assets/images/project-management.png"/>
-                    <h2 class="card-title">Project Management</h2>
-                    <h3 class="card-subtitle">3 Years</h3>
-                    <p>Experienced Project Manager, dedicated to delivering value to clients through careful planning of deliverables and deligently tracking the progress on established milestones. 
+        <main id="top">
+            <section class="hero">
+                <div class="hero-copy">
+                    <p class="eyebrow">PMP-certified project management and operations</p>
+                    <h1>Reliable systems for people-centered work.</h1>
+                    <p class="hero-summary">
+                        I help teams organize complex work, coordinate deliverables, and use practical systems to keep projects moving with clarity.
+                    </p>
+                    <div class="hero-actions" aria-label="Primary actions">
+                        <a class="button primary" href="mailto:wfenyes@gmail.com">Get in touch</a>
+                    </div>
+                </div>
+
+                <figure class="portrait-wrap">
+                    <img class="portrait" src="assets/images/headshot.jpeg" alt="William Fenyes wearing glasses and a blazer" />
+                </figure>
+            </section>
+
+            <section id="bio" class="section split-section">
+                <div>
+                    <p class="section-kicker">About</p>
+                    <h2>Curious, organized, and grounded in service.</h2>
+                </div>
+                <div class="section-copy">
+                    <p>
+                        My name is William Fenyes, though most people call me Billy. I was born and raised in and around Baltimore, Maryland, and I am a devoted Orioles and Ravens fan.
+                    </p>
+                    <p>
+                        My background includes 15 years in local nonprofits, and I now work in the construction industry as a PMP-certified project management professional. Across each setting, I look for better ways to serve teams by improving systems, strengthening communication, and making work easier to manage.
                     </p>
                 </div>
-                <div class="quality-card green">
-                    <img class="card-image" src="assets/images/crm.png"/>
-                    <h2 class="card-title">CRM Administration</h2>
-                    <h3 class="card-subtitle">5 Years</h3>
-                    <p>Full implementation of Blackbaud's Raiser's Edge NXT software from stratch. Managed every aspect from entry to reporting.</p>
+            </section>
+
+            <section id="skills" class="section">
+                <div class="section-heading">
+                    <p class="section-kicker">Core strengths</p>
+                    <h2>Practical skills for mission-driven teams.</h2>
                 </div>
-                <div class="quality-card green">
-                    <img class="card-image" src="assets/images/data.png"/>
-                    <h2 class="card-title">Nonprofit Business Adminstration</h2>
-                    <h3 class="card-subtitle">8 years</h3>
-                    <p>I'm experienced in a wide range of duties associated with nonprofit management. From creating and managing budgets to fundraising and donor relations. 
-                       Especially interested in using data to track and improve the proformance of organizations and their programs. 
+
+                <div class="skills-grid">
+                    <article class="skill-card">
+                        <img src="assets/images/project-management.png" alt="" />
+                        <div>
+                            <p class="skill-meta">4 years | PMP certified</p>
+                            <h3>Project Management</h3>
+                            <p>
+                                Managing construction industry projects by planning deliverables, organizing timelines, tracking milestones, and keeping teams aligned around clear next steps.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="skill-card">
+                        <img src="assets/images/crm.png" alt="" />
+                        <div>
+                            <p class="skill-meta">5 years</p>
+                            <h3>CRM Administration</h3>
+                            <p>
+                                Implementing and managing Blackbaud Raiser's Edge NXT, from data entry standards to reporting and daily workflows.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="skill-card">
+                        <img src="assets/images/data.png" alt="" />
+                        <div>
+                            <p class="skill-meta">8 years</p>
+                            <h3>Nonprofit Administration</h3>
+                            <p>
+                                Supporting budgets, fundraising, donor relations, and data-informed decisions that improve organizational performance.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="sermons" class="section sermons-section">
+                <div class="section-heading">
+                    <p class="section-kicker">Sermons</p>
+                    <h2>Messages and reflections.</h2>
+                    <p class="section-intro">
+                        A place to collect sermons I have preached, with direct links to watch each message on YouTube.
                     </p>
                 </div>
+
+                <div class="sermons-grid">
+                    <article class="sermon-card">
+                        <p class="skill-meta">Feb 16, 2026 | YouTube</p>
+                        <h3>Don't Leave Jerusalem</h3>
+                        <p>A sermon on Acts Chapter 1.</p>
+                        <a class="text-link" href="https://www.youtube.com/watch?v=XCArTvfy5sQ" target="_blank" rel="noopener noreferrer">Watch sermon</a>
+                    </article>
+
+                    <article class="sermon-card">
+                        <p class="skill-meta">Jan 12, 2026 | YouTube</p>
+                        <h3>The Purpose of Prophecy</h3>
+                        <p>A sermon on Daniel 11.</p>
+                        <a class="text-link" href="https://www.youtube.com/watch?v=gqm7vLecSNE" target="_blank" rel="noopener noreferrer">Watch sermon</a>
+                    </article>
+
+                    <article class="sermon-card">
+                        <p class="skill-meta">YouTube</p>
+                        <h3>Sermon Title</h3>
+                        <p>Add a short description, scripture reference, church name, or date for this sermon.</p>
+                        <a class="text-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Watch sermon</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section contact-panel">
+                <div>
+                    <p class="section-kicker">Let's connect</p>
+                    <h2>Interested in practical, people-first systems work?</h2>
+                </div>
+                <a class="button primary" href="mailto:wfenyes@gmail.com">Email me</a>
             </section>
         </main>
-        <script src="script.js"></script>
     </body>
 </html>
