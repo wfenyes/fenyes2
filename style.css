@@ -258,6 +258,66 @@ h3 {
     color: var(--muted);
 }
 
+.sacred-section {
+    align-items: start;
+    background: var(--moss);
+    color: #ffffff;
+    display: grid;
+    gap: clamp(32px, 6vw, 72px);
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+}
+
+.sacred-section .section-kicker {
+    color: var(--gold);
+}
+
+.sacred-copy {
+    max-width: 780px;
+}
+
+.sacred-copy h2 {
+    margin-top: 10px;
+}
+
+.sacred-copy p {
+    color: #eef4e8;
+    font-size: 1.08rem;
+    margin-top: 18px;
+}
+
+.sacred-copy .button {
+    margin-top: 28px;
+}
+
+.sacred-copy .button.primary {
+    background: var(--gold);
+    color: var(--ink);
+}
+
+.sacred-copy .button.primary:hover,
+.sacred-copy .button.primary:focus-visible {
+    background: #f8e1a8;
+}
+
+.sacred-points {
+    display: grid;
+    gap: 16px;
+}
+
+.sacred-points div {
+    border: 1px solid rgba(255, 250, 240, 0.24);
+    border-radius: 8px;
+    padding: 22px;
+}
+
+.sacred-points h3 {
+    color: #ffffff;
+}
+
+.sacred-points p {
+    color: #eef4e8;
+}
+
 .sermons-section {
     background: var(--surface);
     border-top: 1px solid var(--line);
@@ -329,6 +389,7 @@ h3 {
     .hero,
     .split-section,
     .skills-grid,
+    .sacred-section,
     .sermons-grid {
         grid-template-columns: 1fr;
     }
